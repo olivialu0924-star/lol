@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>投票計算站</title>
+    <meta
+      name="description"
+      content="投票計算站，提供排名投票與快速計票，幫你命名與保存每一份投票。"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand-wrap">
+        <div class="brand-mark">V</div>
+        <div>
+          <div class="brand-name">投票計算站</div>
+          <div class="brand-subtitle">命名與保存你的投票</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="主導覽">
+        <button class="nav-btn active" type="button" data-view="home">首頁</button>
+        <button class="nav-btn" type="button" data-view="ranking">排名投票</button>
+        <button class="nav-btn" type="button" data-view="quick">快速計票</button>
+      </nav>
+    </header>
+
+    <main class="app-shell">
+      <section id="homeView" class="view active">
+        <div class="hero panel">
+          <div class="hero-copy">
+            <span class="eyebrow">投票工具</span>
+            <h1>讓每一場投票都能被命名、保存與重用</h1>
+            <p>
+              你可以新增多個投票主題、命名每份投票、保存結果，並在之後快速回顧和重新計算。
+            </p>
+          </div>
+
+          <div class="hero-highlight panel-card">
+            <div class="mini-label">今日概覽</div>
+            <div class="overview-count" id="savedVoteCount">0</div>
+            <div class="overview-text">已保存的投票</div>
+          </div>
+        </div>
+
+        <div class="saved-votes-section panel">
+          <div class="saved-header">
+            <div>
+              <span class="eyebrow">保存列表</span>
+              <h2>已保存的投票</h2>
+            </div>
+            <button id="newVoteBtn" class="primary small" type="button" data-open="ranking">新增投票</button>
+          </div>
+
+          <div id="savedVotesList" class="saved-votes-list"></div>
+        </div>
+      </section>
+
+      <section id="rankingView" class="view">
+        <div class="section-head panel">
+          <div>
+            <span class="eyebrow">工具一</span>
+            <h2>排名投票計算器</h2>
+          </div>
+          <button class="secondary" type="button" data-open="home">回首頁</button>
+        </div>
+
+        <section class="panel tool-panel">
+          <div class="vote-name-row">
+            <label for="rankingVoteName">投票名稱</label>
+            <input id="rankingVoteName" type="text" placeholder="例如：社團幹部選舉" />
+            <button id="saveRankingVoteBtn" class="secondary small" type="button">保存這份投票</button>
+          </div>
+
+          <h3>1. 請問這次投票總共有幾個選項（候選人）？</h3>
+          <div class="setup-row">
+            <label for="numInput">選項數量:</label>
+            <input id="numInput" type="number" min="2" max="6" value="4" />
+            <button id="setupBtn" class="primary">確定並建立填寫欄位</button>
+          </div>
+        </section>
+
+        <div id="fieldsArea" aria-live="polite"></div>
+        <div id="resultArea" aria-live="polite"></div>
+      </section>
+
+      <section id="quickView" class="view">
+        <div class="section-head panel">
+          <div>
+            <span class="eyebrow">工具二</span>
+            <h2>快速計票工具</h2>
+          </div>
+          <button class="secondary" type="button" data-open="home">回首頁</button>
+        </div>
+
+        <div class="panel tool-panel">
+          <div class="vote-name-row">
+            <label for="quickVoteName">投票名稱</label>
+            <input id="quickVoteName" type="text" placeholder="例如：年度活動選擇" />
+            <button id="saveQuickVoteBtn" class="secondary small" type="button">保存這份投票</button>
+          </div>
+
+          <form id="quickVoteForm">
+            <div class="field-group">
+              <label for="quickCandidates">候選人名單（每行一個或用逗號分隔）</label>
+              <textarea id="quickCandidates" rows="6">候選人 A
+候選人 B
+候選人 C
+候選人 D</textarea>
+            </div>
+
+            <div class="field-group">
+              <label for="quickVotes">票數（依候選人順序輸入，逗號分隔）</label>
+              <input id="quickVotes" type="text" value="120,90,75,55" />
+            </div>
+
+            <button type="submit" class="success">計算結果</button>
+          </form>
+
+          <div id="quickVoteResult" class="result-panel result-box empty">
+            <p>請輸入候選人與票數，系統會立即計算勝出者。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
